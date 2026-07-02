@@ -1,0 +1,152 @@
+\documentclass[a4paper]{article}
+    \usepackage{fullpage}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{textcomp}
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    \textheight=10in
+    \pagestyle{empty}
+    \raggedright
+    \usepackage[left=0.8in,right=0.8in,bottom=0.8in,top=0.8in]{geometry}
+    \usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+
+    %\renewcommand{\encodingdefault}{cg}
+%\renewcommand{\rmdefault}{lgrcmr}
+
+\def\bull{\vrule height 0.8ex width .7ex depth -.1ex }
+
+% DEFINITIONS FOR RESUME %%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\area} [2] {
+    \vspace*{-9pt}
+    \begin{verse}
+        \textbf{#1}   #2
+    \end{verse}
+}
+
+\newcommand{\lineunder} {
+    \vspace*{-8pt} \\
+    \hspace*{-18pt} \hrulefill \\
+}
+
+\newcommand{\header} [1] {
+    {\hspace*{-18pt}\vspace*{6pt} \textsc{#1}}
+    \vspace*{-6pt} \lineunder
+}
+
+\newcommand{\employer} [3] {
+    { \textbf{#1} (#2)\\ \underline{\textbf{\emph{#3}}}\\  }
+}
+
+\newcommand{\contact} [3] {
+    \vspace*{-10pt}
+    \begin{center}
+        {\Huge \scshape {#1}}\\
+        #2 \\ #3
+    \end{center}
+    \vspace*{-8pt}
+}
+
+\newenvironment{achievements}{
+    \begin{list}
+        {$\bullet$}{\topsep 0pt \itemsep -2pt}}{\vspace*{4pt}
+    \end{list}
+}
+
+\newcommand{\schoolwithcourses} [4] {
+    \textbf{#1} #2 $\bullet$ #3\\
+    #4 \\
+    \vspace*{5pt}
+}
+
+\newcommand{\school} [4] {
+    \textbf{#1} #2 $\bullet$ #3\\
+    #4 \\
+}
+% END RESUME DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%
+
+    \begin{document}
+\vspace*{-40pt}
+
+%==== Profile ====%
+\vspace*{-10pt}
+\begin{center}
+	{\Huge \scshape \textbf{Amit Kumar Singh}}\\
+	thegigasurgeon@gmail.com $\cdot$ +91-9915503368 $\cdot$ \href{https://gigasurgeon.github.io/portfolio/}{gigasurgeon.github.io/portfolio} $\cdot$ \href{https://www.linkedin.com/in/thegigasurgeon/}{www.linkedin.com/in/thegigasurgeon}\\
+\end{center}
+
+%==== Experience ====%
+\header{Experience}
+\vspace{1mm}
+\textbf{Real Brokerage} \hfill Delhi, India\\
+\textit{AI ML Engineer} \hfill Oct 2024 - Present\\
+\begin{itemize} \itemsep 1pt
+  \item Pretrained and Finetuned of state-of-the-art LLMs and VLMs with reasoning and thinking capabilities, including \textbf{LLaMA 3.3, Qwen 2.5 72B, Qwen 3, Gemma}, using \textbf{LoRA/QLoRA and GRPO-based RL post-training}, tailored for real estate auto-review.
+  \item Currently leading development of enterprise-scale agentic AI document intelligence platform processing \textbf{80K+ PDFs daily}, leveraging \textbf{multi-agent text+visual reasoning pipelines} including\textbf{ tool-calling, subagents, skills.}
+  \item Built a scalable \textbf{Multi-LLM Orchestration} Infrastructure to facilitate a lot of automation within the organization saving \textbf{1000s }of developer hours every week.
+  \item Finetuned \textbf{Google Gemini-3.5-Pro, Gemini-3.5-Flash, GPT 4o} for robust multi-llm agentic workflow.
+  \item End-to-End precise RAG pipeline using \textbf{intent routing,} \textbf{semantic chunking}, \textbf{llm reasoning},  \textbf{hybrid vector retrieval}, \textbf{context optimization}, \textbf{multi-source context aggregation},  embedding generation and structured output generation.
+  \item \textbf{Claude Agent SDK} integration for automated PR reviews, incident investigation, and webhook-driven workflows
+  \item Led an 8-person developer's team coordinating validator development across jurisdictions.
+  \item   Built high-precision information extraction pipelines for unstructured real estate documents using \textbf{YOLOv9, Doctr OCR, and custom VLMs}, boosting accuracy from \textbf{35\% to 99.85\%}.
+  \item Engineered scalable ML pipelines fusing \textbf{5+ specialized models} (VLMs, LLMs, OCR, Object Detection, embeddings) in a single application, deployed as \textbf{microservices on Kubernetes} across AWS and GCP, processing \textbf{80k} \textbf{PDFs} per day.
+  \item Achieved a \textbf{200\%} pipeline speedup through graph optimizations, batched inference, model quantization (\textbf{INT8/FP16, AWQ/GPTQ}), and architecture-level modifications for fast inference.
+
+\end{itemize}
+
+\textbf{Streamingo AI} \hfill Noida, India\\
+\textit{Deep Learning Engineer} \hfill Nov 2022 -- Oct 2024
+\begin{itemize} \itemsep 1pt
+  \item Developed end-to-end temporal event understanding systems using \textbf{Swin, VideoMAE, MVD, ViT, BEiT}.
+  \item Worked on problems like video activity recognition, player tracking, pose detection, basketball court localization, face blurring, logo identification, zero shot classification, planogram compliance, etc. on videos and images.
+  \item Designed zero-shot and few-shot classification systems using \textbf{CLIP, Detic, Prototypical Networks}, enabling rapid scalability across unseen classes.
+  \item Built a real-time sports analytics engine combining object detection, multi-object tracking, pose estimation, and court localization.
+  \item Deployed optimized inference pipelines using \textbf{TensorRT} and {ONNX}, delivering \textbf{3x} FPS.
+\end{itemize}
+
+\textbf{Attentive AI} \hfill Noida, India\\
+\textit{Computer Vision Research Engineer} \hfill Apr 2021 -- Nov 2022
+\begin{itemize} \itemsep 1pt
+	\item Built and trained State Of The Art neural networks for image segmentation in satellite imagery i.e.\textbf{ HRNet, Vision Transformer}.
+	\item End to end ownership of CV products (Falcon and Respod) across the company.
+	\item Improved accuracy of models by 12\% and reduced overall post-processing time by 90\%.
+\end{itemize}
+
+\textbf{Nokia} \hfill Bangalore, India\\
+\textit{Software Engineer} \hfill Jul 2020 -- Mar 2021
+\begin{itemize} \itemsep 1pt
+  \item Created a meta-learning platform for dynamic model selection and hyperparameter optimization across various business problems.
+  \item Integrated Explainable AI (XAI) modules using SHAP, LIME for model interpretability and compliance.
+\end{itemize}
+
+\vspace{2mm}
+%==== Projects ====%%
+\header{Projects}
+
+\textbf{Basketball Video to 3D Mapping} \textit{(PyTorch, Visual SLAM, ORBv3, Blender, Homography, VideoMAE)}\\
+Reconstructed player trajectories in 3D from monocular sports footage using deep video transformers and traditional SLAM pipelines. Added temporal event summarization via transformer-based description generation.
+
+\vspace{1mm}
+\textbf{Tekken with Pose} \textit{(YOLOvNAS, Pose Estimation, Raspberry Pi)}\\
+Created a camera-driven interface to map real-world actions into virtual gameplay using pose estimation, latency-aware gesture recognition, and control mapping.
+
+\vspace{2mm}
+\textbf{Charlie - AI Virtual Assistant} \textit{(Raspberry Pi, Python, STT, FaceNet)}\\
+Built an edge-deployable assistant with multi-modal recognition: speaker ID, facial login, offline STT, and contextual response generation.\\
+\vspace{2mm}
+%==== Skills ====%%
+\header{Skills}
+\begin{tabular}{ l p{5.1in} }
+  Programming Languages: & Python, C++, JavaScript \\
+  ML / Post-Training: & GRPO (RL), LoRA/QLoRA, distillation, quantization (INT8/FP16, AWQ/GPTQ), agentic AI (tool-calling, subagents), RAG, multimodal fine-tuning \\
+  Libraries \& Infra: & PyTorch, TensorFlow, Langchain, Claude Agent SDK, Detectron2, OpenCV, TensorRT, ONNX, Kubernetes, Docker, microservices, AWS, GCP
+\end{tabular}
+
+%==== Education ====%%
+\vspace{2mm}
+\header{Education}
+\textbf{Chandigarh University} \hfill B.Tech. in Computer Science\\
+\textit{GPA: 8.28}\
+
+\end{document}

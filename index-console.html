@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>amit@portfolio: ~ (Console layout)</title>
+<meta name="description" content="Amit Kumar Singh — AI/ML Engineer. Terminal-session portfolio." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0d1117; --term: #010409; --chrome: #161b22; --border: #30363d;
+    --text: #c9d1d9; --green: #3fb950; --amber: #d29922; --cyan: #58a6ff;
+    --pink: #f778ba; --dim: #8b949e; --sel: rgba(63, 185, 80, 0.15);
+  }
+  [data-theme="light"] {
+    --bg: #d8d3c8; --term: #f3efe6; --chrome: #e4dfd2; --border: #b5ad9c;
+    --text: #2a2a20; --green: #1a7f37; --amber: #9a6700; --cyan: #0969da;
+    --pink: #bf3989; --dim: #6e6a5c; --sel: rgba(26, 127, 55, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'JetBrains Mono', monospace; background: var(--bg); color: var(--text);
+    padding: clamp(8px, 3vw, 40px); min-height: 100vh; line-height: 1.55; font-size: 14px;
+  }
+  ::selection { background: var(--sel); }
+
+  .term {
+    max-width: 980px; margin: 0 auto; background: var(--term); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.45);
+  }
+  .bar {
+    background: var(--chrome); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px; padding: 10px 14px; position: sticky; top: 0; z-index: 5;
+  }
+  .bar .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .bar .r { background: #ff5f57; } .bar .y { background: #febc2e; } .bar .g { background: #28c840; }
+  .bar .title { flex: 1; text-align: center; color: var(--dim); font-size: 0.8rem; }
+  .bar button {
+    font-family: inherit; font-size: 0.7rem; background: none; border: 1px solid var(--border);
+    color: var(--dim); border-radius: 6px; padding: 3px 10px; cursor: pointer;
+  }
+  .bar button:hover { color: var(--text); border-color: var(--dim); }
+
+  .screen { padding: 22px clamp(14px, 3vw, 34px) 60px; }
+
+  /* menu of commands */
+  .menu { color: var(--dim); margin-bottom: 20px; }
+  .menu .cmds { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .menu a {
+    color: var(--cyan); text-decoration: none; border: 1px solid var(--border); border-radius: 6px;
+    padding: 3px 10px; font-size: 0.8rem;
+  }
+  .menu a:hover { background: var(--sel); }
+
+  .block { margin-bottom: 30px; }
+  .prompt { color: var(--dim); white-space: pre-wrap; word-break: break-word; }
+  .prompt .u { color: var(--green); } .prompt .p { color: var(--cyan); } .prompt .cmd { color: var(--text); font-weight: 500; }
+  .out { margin-top: 6px; white-space: pre-wrap; word-break: break-word; }
+  .out .c-g { color: var(--green); } .out .c-a { color: var(--amber); } .out .c-c { color: var(--cyan); }
+  .out .c-p { color: var(--pink); } .out .c-d { color: var(--dim); } .out b { color: var(--text); font-weight: 700; }
+  .out a { color: var(--cyan); }
+  .cursor::after { content: '▋'; color: var(--green); animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .copy { font-family: inherit; font-size: 0.7rem; background: none; border: 1px solid var(--border); color: var(--cyan); border-radius: 5px; padding: 1px 8px; cursor: pointer; margin-left: 8px; }
+  .hidden-until-typed .out { display: none; }
+  .hidden-until-typed.done .out { display: block; }
+  details.man { border: 1px dashed var(--border); border-radius: 6px; padding: 8px 12px; margin-top: 8px; }
+  details.man summary { cursor: pointer; color: var(--amber); font-size: 0.85rem; }
+  details.man .out { color: var(--dim); }
+</style>
+</head>
+<body>
+<div class="term">
+  <div class="bar">
+    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+    <span class="title">amit@portfolio: ~</span>
+    <button id="themeToggle">print mode</button>
+  </div>
+  <div class="screen">
+
+    <div class="menu"><span class="c-g" style="color:var(--green)">mail:</span> <span style="user-select:all">thegigasurgeon@gmail.com</span> · <span class="c-g" style="color:var(--green)">tel:</span> <span style="user-select:all">+91-9915503368</span>
+Last login: from a GPU cluster somewhere · Type nothing — just scroll, or jump to a command:
+      <div class="cmds">
+        <a href="#b-whoami">whoami</a><a href="#b-impact">cat impact.txt</a><a href="#b-systems">ls systems/</a>
+        <a href="#b-career">git log --career</a><a href="#b-skills">skills --graph</a><a href="#b-contact">contact --show</a><a href="#b-resume">wget resume.pdf</a>
+      </div>
+    </div>
+
+    <div class="block hidden-until-typed" id="b-whoami" data-cmd="whoami --verbose">
+      <div class="prompt"><span class="u">amit@portfolio</span>:<span class="p">~</span>$ <span class="cmd"></span></div>
+      <div class="out"><b>Amit Kumar Singh</b> — Applied AI Engineer &amp; Team Lead
+<span class="c-d">────────────────────────────────────────────────</span>
+<span class="c-g">focus:</span>    NLP · Multimodal · Computer Vision
+<span class="c-g">does:</span>     GRPO-based RL post-training of SOTA LLMs &amp; VLMs
+          agentic pipelines fusing <b>5+ models</b> per request
+          architecture-level tuning for fast inference
+<span class="c-g">stack:</span>    model weights → CUDA → Kubernetes
+<span class="c-g">leads:</span>    8-engineer validator team @ Real Brokerage</div>
+    </div>
+
+    <div class="block hidden-until-typed" id="b-impact" data-cmd="cat impact.txt">
+      <div class="prompt"><span class="u">amit@portfolio</span>:<span class="p">~</span>$ <span class="cmd"></span></div>
+      <div class="out"><span class="c-d">┌───────────────┬───────────────────────────────────────────┐</span>
+<span class="c-d">│</span> <span class="c-a">80K+/day</span>      <span class="c-d">│</span> PDFs processed by the agentic platform    <span class="c-d">│</span>
+<span class="c-d">│</span> <span class="c-a">99.85%</span>        <span class="c-d">│</span> extraction accuracy (was 35%)             <span class="c-d">│</span>
+<span class="c-d">│</span> <span class="c-a">1000s/wk</span>      <span class="c-d">│</span> dev-hours saved via LLM orchestration     <span class="c-d">│</span>
+<span class="c-d">│</span> <span class="c-a">200%</span>          <span class="c-d">│</span> inference pipeline speedup                <span class="c-d">│</span>
+<span class="c-d">│</span> <span class="c-a">3x</span>            <span class="c-d">│</span> FPS gain, real-time video analytics       <span class="c-d">│</span>
+<span class="c-d">│</span> <span class="c-a">-90%</span>          <span class="c-d">│</span> post-processing time, geospatial CV       <span class="c-d">│</span>
+<span class="c-d">│</span> <span class="c-a">8</span>             <span class="c-d">│</span> engineers led                             <span class="c-d">│</span>
+<span class="c-d">│</span> <span class="c-a">5+</span>            <span class="c-d">│</span> models fused in one pipeline              <span class="c-d">│</span>
+<span class="c-d">└───────────────┴───────────────────────────────────────────┘</span></div>
+    </div>
+
+    <div class="block hidden-until-typed" id="b-systems" data-cmd="ls systems/ && head -n 999 systems/*.md">
+      <div class="prompt"><span class="u">amit@portfolio</span>:<span class="p">~</span>$ <span class="cmd"></span></div>
+      <div class="out"><span class="c-c">01_doc_intelligence.md  02_llm_orchestration.md  03_rag_pipeline.md
+04_claude_agents.md     05_sports_analytics.md   06_satellite_seg.md</span>
+
+<span class="c-p">==&gt; systems/01_doc_intelligence.md &lt;==</span>
+<b># Agentic AI Document Intelligence Platform</b>  <span class="c-d">(Real Brokerage · lead)</span>
+Real-estate paperwork is dense and inconsistent; manual review can't scale.
+<span class="c-g">approach:</span> cooperating agents over <b>5+ models</b> — detection, OCR, vision VLM,
+reasoning LLMs, embeddings — open weights tuned with <b>LoRA/QLoRA + GRPO (RL)</b>.
+<span class="c-g">deploy:</span>   microservices on K8s across AWS &amp; GCP; self-hosted GPUs, cont. batching.
+<span class="c-g">impact:</span>   accuracy <b>35% → 99.85%</b> · <b>80K+ PDFs/day</b> in production.
+
+<span class="c-p">==&gt; systems/02_llm_orchestration.md &lt;==</span>
+<b># Multi-LLM Orchestration Infrastructure</b>
+Intent router over <b>Gemini 3.5 Pro/Flash, GPT-4o, LLaMA 3.3, Qwen 3, Gemma</b>
+with per-task LoRA fine-tunes, fallback, structured outputs.
+<span class="c-g">impact:</span>   org-wide default for automation · <b>1000s of dev-hours saved weekly</b>.
+
+<span class="c-p">==&gt; systems/03_rag_pipeline.md &lt;==</span>
+<b># End-to-End RAG Pipeline</b>
+Intent routing → semantic chunking → hybrid dense+keyword retrieval → rerank
+→ context fusion → structured output. Backbone of the 80K+/day platform.
+
+<span class="c-p">==&gt; systems/04_claude_agents.md &lt;==</span>
+<b># Claude Agent SDK Automation</b>
+PR/incident/webhook-triggered agent loop: reads diffs, runs tests, spawns
+subagents, posts reviews. First-pass review &amp; triage, automated.
+
+<span class="c-p">==&gt; systems/05_sports_analytics.md &lt;==</span>
+<b># Real-Time Sports Analytics</b>  <span class="c-d">(Streamingo AI)</span>
+Detection + tracking + pose + court localization; Swin/VideoMAE/ViT compiled
+to TensorRT, INT8/FP16, batched streams. <span class="c-g">impact:</span> <b>3× FPS</b>, same GPUs.
+
+<span class="c-p">==&gt; systems/06_satellite_seg.md &lt;==</span>
+<b># Satellite Image Segmentation</b>  <span class="c-d">(Attentive AI)</span>
+HRNet + ViT masks from orbit; owned Falcon &amp; Respod end-to-end.
+<span class="c-g">impact:</span>   <b>+12% accuracy</b> · <b>−90% post-processing</b>.</div>
+      <details class="man"><summary>man systems — architecture figures</summary>
+        <div class="out" style="display:block">
+<a href="assets/doc-intelligence.svg" target="_blank">assets/doc-intelligence.svg</a>  <a href="assets/orchestration.svg" target="_blank">assets/orchestration.svg</a>  <a href="assets/rag.svg" target="_blank">assets/rag.svg</a>
+<a href="assets/claude-agent.svg" target="_blank">assets/claude-agent.svg</a>      <a href="assets/vision.svg" target="_blank">assets/vision.svg</a>         <a href="assets/segmentation.svg" target="_blank">assets/segmentation.svg</a></div>
+      </details>
+    </div>
+
+    <div class="block hidden-until-typed" id="b-career" data-cmd="git log --career --oneline --decorate">
+      <div class="prompt"><span class="u">amit@portfolio</span>:<span class="p">~</span>$ <span class="cmd"></span></div>
+      <div class="out"><span class="c-a">2024–now</span>  <span class="c-g">(HEAD)</span> <b>AI/ML Engineer @ Real Brokerage</b>, Delhi
+          agentic doc platform 80K+ PDFs/day @ 99.85% · GRPO/QLoRA tuning
+          multi-LLM orchestration · Claude Agent SDK automation · led 8 engineers
+<span class="c-a">2022–24</span>   <b>Deep Learning Engineer @ Streamingo AI</b>, Noida
+          video understanding (Swin/VideoMAE/MVD/ViT/BEiT) · 3× FPS via TensorRT
+<span class="c-a">2021–22</span>   <b>CV Research Engineer @ Attentive AI</b>, Noida
+          satellite segmentation (HRNet/ViT) · +12% acc · −90% post-processing
+<span class="c-a">2020–21</span>   <b>Software Engineer @ Nokia</b>, Bangalore
+          meta-learning platform · XAI (SHAP/LIME)
+<span class="c-d">edu:      B.Tech CSE, Chandigarh University · GPA 8.28</span></div>
+    </div>
+
+    <div class="block hidden-until-typed" id="b-skills" data-cmd="skills --graph">
+      <div class="prompt"><span class="u">amit@portfolio</span>:<span class="p">~</span>$ <span class="cmd"></span></div>
+      <div class="out"><span class="c-g">post-training</span>   <span class="c-a">████████████████████</span>  GRPO (RL) · LoRA/QLoRA · distill · prune
+<span class="c-g">agentic-ai</span>      <span class="c-a">████████████████████</span>  multi-agent · tool-calling · subagents · Claude SDK
+<span class="c-g">rag</span>             <span class="c-a">███████████████████░</span>  routing · chunking · hybrid retrieval · rerank
+<span class="c-g">vision</span>          <span class="c-a">████████████████████</span>  YOLOv9 · Swin · VideoMAE · ViT · CLIP · HRNet
+<span class="c-g">inference-opt</span>   <span class="c-a">████████████████████</span>  TensorRT · ONNX · INT8/FP16 · AWQ/GPTQ · batching
+<span class="c-g">infra</span>           <span class="c-a">██████████████████░░</span>  K8s · Docker · microservices · AWS · GCP
+<span class="c-g">languages</span>       <span class="c-a">███████████████████░</span>  Python · C++ · JavaScript</div>
+    </div>
+
+    <div class="block hidden-until-typed" id="b-contact" data-cmd="contact --show">
+      <div class="prompt"><span class="u">amit@portfolio</span>:<span class="p">~</span>$ <span class="cmd"></span></div>
+      <div class="out"><span class="c-g">EMAIL</span>     thegigasurgeon@gmail.com <button class="copy" data-copy="thegigasurgeon@gmail.com">copy</button>
+<span class="c-g">PHONE</span>     +91-9915503368 <button class="copy" data-copy="+91-9915503368">copy</button>
+<span class="c-g">LINKEDIN</span>  <a href="https://www.linkedin.com/in/thegigasurgeon/" target="_blank" rel="noopener">linkedin.com/in/thegigasurgeon</a>
+<span class="c-d"># values are plain text — select or hit copy; no mail app required.</span></div>
+    </div>
+
+    <div class="block hidden-until-typed" id="b-resume" data-cmd="wget resume.pdf">
+      <div class="prompt"><span class="u">amit@portfolio</span>:<span class="p">~</span>$ <span class="cmd"></span></div>
+      <div class="out">Resolving amit-portfolio... done.
+Saving to: <a href="Amit_Kumar_Singh_Resume.pdf" download><b>Amit_Kumar_Singh_Resume.pdf</b></a>  <span class="c-g">[click to download]</span>
+<span class="c-a">resume.pdf     100%[===================&gt;]  updated · GRPO · 99.85% · 80K PDFs/day</span>
+<span class="c-d">2026 amit@portfolio — thanks for scrolling this far.</span> <span class="cursor"></span></div>
+    </div>
+
+  </div>
+</div>
+<script>
+  // Theme toggle (green terminal ↔ paper printout).
+  const root = document.documentElement, toggle = document.getElementById('themeToggle');
+  const saved = localStorage.getItem('theme-console');
+  if (saved) { root.setAttribute('data-theme', saved); toggle.textContent = saved === 'light' ? 'crt mode' : 'print mode'; }
+  toggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    toggle.textContent = next === 'light' ? 'crt mode' : 'print mode';
+    localStorage.setItem('theme-console', next);
+  });
+
+  // Type each command when its block scrolls into view, then reveal the output.
+  function typeCmd(block) {
+    const target = block.querySelector('.prompt .cmd');
+    const text = block.dataset.cmd;
+    let i = 0;
+    (function step() {
+      target.textContent = text.slice(0, ++i);
+      if (i < text.length) setTimeout(step, 18 + Math.random() * 30);
+      else setTimeout(() => block.classList.add('done'), 180);
+    })();
+  }
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { typeCmd(e.target); io.unobserve(e.target); }
+  }), { threshold: 0.15 });
+  document.querySelectorAll('.hidden-until-typed').forEach(el => io.observe(el));
+
+  // Copy buttons.
+  document.querySelectorAll('.copy').forEach(btn => btn.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(btn.dataset.copy); } catch {
+      const ta = document.createElement('textarea'); ta.value = btn.dataset.copy;
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    }
+    const prev = btn.textContent; btn.textContent = 'copied ✓'; setTimeout(() => btn.textContent = prev, 1500);
+  }));
+</script>
+</body>
+</html>

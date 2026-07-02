@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Choose a theme — Amit Kumar Singh Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: #06070d; color: #e7e9f3; min-height: 100vh; padding: 64px 24px; }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #22d3ee; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+  h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -0.03em; margin-bottom: 12px; }
+  .sub { color: #969ab5; margin-bottom: 48px; max-width: 560px; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+  .card { text-decoration: none; color: inherit; border: 1px solid rgba(255,255,255,0.09); border-radius: 18px; overflow: hidden; background: rgba(255,255,255,0.02); transition: transform 0.25s, border-color 0.25s; display: flex; flex-direction: column; }
+  .card:hover { transform: translateY(-5px); border-color: rgba(124,92,255,0.5); }
+  .swatch { height: 130px; position: relative; display: flex; align-items: flex-end; padding: 16px; }
+  .swatch .dots { display: flex; gap: 8px; }
+  .swatch .dots i { width: 26px; height: 26px; border-radius: 50%; display: block; box-shadow: 0 0 16px currentColor; }
+  .card .body { padding: 20px 22px 24px; }
+  .card h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .card p { color: #969ab5; font-size: 0.9rem; }
+  .card .go { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #22d3ee; margin-top: 14px; }
+  .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,0.08); color: #cdd0e0; font-weight: 400; }
+
+  /* Swatch backgrounds per theme */
+  .sw-aurora    { background: linear-gradient(120deg, #06070d, #1a1140 60%, #0e3a44); }
+  .sw-aurora    i:nth-child(1){color:#7c5cff;background:#7c5cff} .sw-aurora i:nth-child(2){color:#22d3ee;background:#22d3ee} .sw-aurora i:nth-child(3){color:#f472b6;background:#f472b6}
+  .sw-terminal  { background: linear-gradient(120deg, #050806, #0b1e12); }
+  .sw-terminal  i:nth-child(1){color:#00ff9c;background:#00ff9c} .sw-terminal i:nth-child(2){color:#37e0c0;background:#37e0c0} .sw-terminal i:nth-child(3){color:#a6ff00;background:#a6ff00}
+  .sw-synthwave { background: linear-gradient(120deg, #120428, #3a0b52 60%, #06303a); }
+  .sw-synthwave i:nth-child(1){color:#ff2fb9;background:#ff2fb9} .sw-synthwave i:nth-child(2){color:#2de2e6;background:#2de2e6} .sw-synthwave i:nth-child(3){color:#ff9e2c;background:#ff9e2c}
+  .sw-editorial { background: linear-gradient(120deg, #faf7f1, #efe7d8); }
+  .sw-editorial i:nth-child(1){color:#b45309;background:#b45309} .sw-editorial i:nth-child(2){color:#0f766e;background:#0f766e} .sw-editorial i:nth-child(3){color:#a83a54;background:#a83a54}
+  .sw-sakura    { background: linear-gradient(120deg, #fdf5f7, #f7dbe7 55%, #e5dcf5); }
+  .sw-sakura    i:nth-child(1){color:#d4517f;background:#d4517f} .sw-sakura i:nth-child(2){color:#7c6bc9;background:#7c6bc9} .sw-sakura i:nth-child(3){color:#d4894f;background:#d4894f}
+  .sw-brutalist { background: linear-gradient(120deg, #f4f1ea 60%, #ffd400 60%); }
+  .sw-brutalist i:nth-child(1){color:#111;background:#111} .sw-brutalist i:nth-child(2){color:#e04400;background:#e04400} .sw-brutalist i:nth-child(3){color:#0077b6;background:#0077b6}
+  .sw-blueprint { background: linear-gradient(120deg, #0a2447, #0d2c55); background-image: linear-gradient(rgba(214,232,255,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(214,232,255,0.12) 1px, transparent 1px), linear-gradient(120deg, #0a2447, #0d2c55); background-size: 22px 22px, 22px 22px, 100% 100%; }
+  .sw-blueprint i:nth-child(1){color:#ffffff;background:#ffffff} .sw-blueprint i:nth-child(2){color:#7fd4ff;background:#7fd4ff} .sw-blueprint i:nth-child(3){color:#ffd166;background:#ffd166}
+  .sw-noir      { background: linear-gradient(120deg, #0b0a08, #241d10); }
+  .sw-noir      i:nth-child(1){color:#d4b474;background:#d4b474} .sw-noir i:nth-child(2){color:#e8d9b0;background:#e8d9b0} .sw-noir i:nth-child(3){color:#a67c52;background:#a67c52}
+  .sw-dossier   { background: linear-gradient(105deg, #16150f 34%, #f6f5f1 34%); }
+  .sw-dossier   i:nth-child(1){color:#d93a2b;background:#d93a2b} .sw-dossier i:nth-child(2){color:#16150f;background:#16150f} .sw-dossier i:nth-child(3){color:#9b988a;background:#9b988a}
+  .sw-magazine  { background: linear-gradient(180deg, #f7f2e7 70%, #1c1710 70%); }
+  .sw-magazine  i:nth-child(1){color:#ab2318;background:#ab2318} .sw-magazine i:nth-child(2){color:#1c1710;background:#1c1710} .sw-magazine i:nth-child(3){color:#ffce54;background:#ffce54}
+  .sw-console   { background: linear-gradient(120deg, #010409, #0d1117); }
+  .sw-console   i:nth-child(1){color:#3fb950;background:#3fb950} .sw-console i:nth-child(2){color:#58a6ff;background:#58a6ff} .sw-console i:nth-child(3){color:#d29922;background:#d29922}
+  .group-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; margin: 44px 0 16px; color: #cdd0e0; display: flex; align-items: center; gap: 12px; }
+  .group-title::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
+  .group-title small { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #6a6f8c; font-weight: 400; }
+
+  footer { text-align: center; color: #6a6f8c; font-size: 0.82rem; margin-top: 48px; font-family: 'JetBrains Mono', monospace; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Portfolio · Theme Picker</div>
+  <h1>Pick the look you like best.</h1>
+  <p class="sub">Same content, many looks. Open any one — each has its own built-in light/dark toggle. When you've decided, that file is the one to deploy.</p>
+
+  <div class="group-title">Structural layouts <small>// different placement, components &amp; navigation — not just colors</small></div>
+  <div class="grid">
+    <a class="card" href="index-dossier.html">
+      <div class="swatch sw-dossier"><div class="dots"><i></i><i></i><i></i></div></div>
+      <div class="body">
+        <h2>Dossier <span class="tag">sidebar · Swiss</span></h2>
+        <p>Fixed dark sidebar with numbered nav; content as ruled data rows and an expandable systems ledger — no cards at all.</p>
+        <div class="go">index-dossier.html →</div>
+      </div>
+    </a>
+    <a class="card" href="index-magazine.html">
+      <div class="swatch sw-magazine"><div class="dots"><i></i><i></i><i></i></div></div>
+      <div class="body">
+        <h2>Magazine <span class="tag">print · editorial</span></h2>
+        <p>Newspaper masthead, scrolling stat ticker, drop-cap feature story in columns, systems as roman-numeral articles.</p>
+        <div class="go">index-magazine.html →</div>
+      </div>
+    </a>
+    <a class="card" href="index-console.html">
+      <div class="swatch sw-console"><div class="dots"><i></i><i></i><i></i></div></div>
+      <div class="body">
+        <h2>Console <span class="tag">interactive · TUI</span></h2>
+        <p>A live terminal session: commands type themselves as you scroll — whoami, cat impact.txt, git log --career, ASCII charts.</p>
+        <div class="go">index-console.html →</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="group-title">Palette variants <small>// same structure as Aurora, different skin</small></div>
+  <div class="grid">
+    <a class="card" href="index.html">
+      <div class="swatch sw-aurora"><div class="dots"><i></i><i></i><i></i></div></div>
+      <div class="body">
+        <h2>Aurora <span class="tag">default · dark/light</span></h2>
+        <p>Deep space-black with a purple → cyan → pink gradient and floating orbs. The flagship look.</p>
+        <div class="go">index.html →</div>
+      </div>
+    </a>
+
+    <a class="card" href="index-terminal.html">
+      <div class="swatch sw-terminal"><div class="dots"><i></i><i></i><i></i></div></div>
+      <div class="body">
+        <h2>Terminal <span class="tag">monospace</span></h2>
+        <p>Phosphor-green on near-black, all-monospace, boxy edges — a hacker-console feel.</p>
+        <div class="go">index-terminal.html →</div>
+      </div>
+    </a>
+
+    <a class="card" href="index-synthwave.html">
+      <div class="swatch sw-synthwave"><div class="dots"><i></i><i></i><i></i></div></div>
+      <div class="body">
+        <h2>Synthwave <span class="tag">neon</span></h2>
+        <p>Neon magenta and cyan on deep indigo, with amped-up glow. Retro-futurist.</p>
+        <div class="go">index-synthwave.html →</div>
+      </div>
+    </a>
+
+    <a class="card" href="index-editorial.html">
+      <div class="swatch sw-editorial"><div class="dots"><i></i><i></i><i></i></div></div>
+      <div class="body">
+        <h2>Editorial <span class="tag">light · serif</span></h2>
+        <p>Warm ivory, elegant Fraunces serif headings. Light-first and understated.</p>
+        <div class="go">index-editorial.html →</div>
+      </div>
+    </a>
+
+    <a class="card" href="index-sakura.html">
+      <div class="swatch sw-sakura"><div class="dots"><i></i><i></i><i></i></div></div>
+      <div class="body">
+        <h2>Sakura <span class="tag">artistic · watercolor</span></h2>
+        <p>Cherry-blossom pastels, italic serif accents, petal-soft corners. Painterly and warm.</p>
+        <div class="go">index-sakura.html →</div>
+      </div>
+    </a>
+
+    <a class="card" href="index-brutalist.html">
+      <div class="swatch sw-brutalist"><div class="dots"><i></i><i></i><i></i></div></div>
+      <div class="body">
+        <h2>Brutalist <span class="tag">artistic · poster</span></h2>
+        <p>Stark paper white, massive uppercase type, hard offset shadows, zero rounding. A statement.</p>
+        <div class="go">index-brutalist.html →</div>
+      </div>
+    </a>
+
+    <a class="card" href="index-blueprint.html">
+      <div class="swatch sw-blueprint"><div class="dots"><i></i><i></i><i></i></div></div>
+      <div class="body">
+        <h2>Blueprint <span class="tag">artistic · technical</span></h2>
+        <p>Drafting-table blue with chalk gridlines and dashed borders — an engineer's drawing of yourself.</p>
+        <div class="go">index-blueprint.html →</div>
+      </div>
+    </a>
+
+    <a class="card" href="index-noir.html">
+      <div class="swatch sw-noir"><div class="dots"><i></i><i></i><i></i></div></div>
+      <div class="body">
+        <h2>Noir &amp; Gold <span class="tag">luxe · serif</span></h2>
+        <p>Black and champagne gold with high-fashion Playfair type. Quiet luxury.</p>
+        <div class="go">index-noir.html →</div>
+      </div>
+    </a>
+  </div>
+
+  <footer>Amit Kumar Singh · AI/ML Engineer</footer>
+</div>
+</body>
+</html>

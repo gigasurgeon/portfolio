@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Amit Kumar Singh — AI/ML Engineer (Magazine layout)</title>
+<meta name="description" content="Amit Kumar Singh — AI/ML Engineer. Print-magazine portfolio." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Oswald:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #f7f2e7; --ink: #1c1710; --mute: #574e3f; --faint: #99907d;
+    --rule: #1c1710; --thin: #cfc6b2; --red: #ab2318;
+  }
+  [data-theme="dark"] {
+    --paper: #17140e; --ink: #efe8d8; --mute: #b3a992; --faint: #6e6650;
+    --rule: #efe8d8; --thin: #3a352a; --red: #e05a3a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Source Serif 4', Georgia, serif; background: var(--paper); color: var(--ink); line-height: 1.65; }
+  .kicker { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.72rem; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 44px); }
+
+  /* Masthead */
+  .mast { text-align: center; padding: 40px 0 0; }
+  .mast .top-row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--rule); padding-bottom: 10px; }
+  .mast .top-row .kicker { color: var(--mute); }
+  .mast .top-row button {
+    font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    background: none; border: 1px solid var(--rule); color: var(--ink); padding: 5px 14px; cursor: pointer;
+  }
+  .mast h1 {
+    font-family: 'Playfair Display', serif; font-weight: 900; letter-spacing: 0.01em;
+    font-size: clamp(2.6rem, 9.5vw, 7rem); line-height: 1; padding: 26px 0 18px; text-transform: uppercase;
+  }
+  .mast .deck {
+    display: flex; justify-content: space-between; border-top: 3px double var(--rule); border-bottom: 3px double var(--rule);
+    padding: 9px 4px; flex-wrap: wrap; gap: 6px;
+  }
+  .mast .deck span { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); }
+
+  /* Ticker */
+  .ticker { overflow: hidden; border-bottom: 1px solid var(--rule); background: var(--ink); color: var(--paper); }
+  .ticker .strip { display: inline-flex; white-space: nowrap; animation: tick 34s linear infinite; padding: 9px 0; }
+  .ticker span { font-family: 'Oswald', sans-serif; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 26px; }
+  .ticker b { color: #ffce54; font-weight: 500; }
+  @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* Feature: asymmetric article */
+  .feature { display: grid; grid-template-columns: 2fr 1fr; gap: 44px; padding: 54px 0; border-bottom: 1px solid var(--rule); }
+  @media (max-width: 860px) { .feature { grid-template-columns: 1fr; } }
+  .feature .headline { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(1.9rem, 4.4vw, 3.2rem); line-height: 1.12; margin: 10px 0 14px; }
+  .feature .byline { font-style: italic; color: var(--mute); margin-bottom: 22px; font-size: 0.95rem; }
+  .feature .cols { column-count: 2; column-gap: 34px; column-rule: 1px solid var(--thin); font-size: 1rem; color: var(--mute); }
+  @media (max-width: 640px) { .feature .cols { column-count: 1; } }
+  .feature .cols p { margin-bottom: 14px; }
+  .feature .cols b { color: var(--ink); }
+  .feature .cols .dropcap::first-letter {
+    font-family: 'Playfair Display', serif; font-weight: 900; font-size: 3.4em; float: left;
+    line-height: 0.85; padding: 4px 8px 0 0; color: var(--red);
+  }
+  .rail { border-left: 1px solid var(--rule); padding-left: 30px; display: flex; flex-direction: column; gap: 26px; }
+  @media (max-width: 860px) { .rail { border-left: none; padding-left: 0; } }
+  .pull { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500; font-size: 1.5rem; line-height: 1.3; }
+  .pull::before { content: '“'; color: var(--red); }
+  .pull::after { content: '”'; color: var(--red); }
+  .rail .fact { border-top: 1px solid var(--thin); padding-top: 12px; }
+  .rail .fact .kicker { color: var(--red); }
+  .rail .fact .fv { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; }
+  .rail .fact .fd { font-size: 0.85rem; color: var(--mute); }
+  .rail .dl {
+    font-family: 'Oswald', sans-serif; letter-spacing: 0.16em; text-transform: uppercase; font-size: 0.78rem;
+    text-align: center; text-decoration: none; color: var(--paper); background: var(--red); padding: 13px 10px;
+  }
+
+  /* Systems as articles */
+  .sec-banner { display: flex; align-items: center; gap: 20px; padding: 40px 0 8px; }
+  .sec-banner h2 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(1.7rem, 4vw, 2.6rem); text-transform: uppercase; white-space: nowrap; }
+  .sec-banner::after { content: ''; height: 1px; background: var(--rule); flex: 1; }
+  .article { display: grid; grid-template-columns: 90px 1.4fr 1fr; gap: 30px; padding: 34px 0; border-bottom: 1px solid var(--thin); }
+  .article:nth-child(even of .article) { grid-template-columns: 90px 1fr 1.4fr; }
+  .article:nth-child(even of .article) .art-img { order: 2; }
+  .article:nth-child(even of .article) .art-txt { order: 3; }
+  @media (max-width: 860px) { .article, .article:nth-child(even of .article) { grid-template-columns: 1fr; gap: 16px; } .art-img { order: 0 !important; } .art-txt { order: 0 !important; } }
+  .roman { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; color: var(--red); }
+  .art-txt h3 { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700; line-height: 1.2; margin-bottom: 8px; }
+  .art-txt .standfirst { font-style: italic; color: var(--mute); font-size: 0.92rem; margin-bottom: 12px; }
+  .art-txt p { font-size: 0.95rem; color: var(--mute); margin-bottom: 10px; }
+  .art-txt p b { color: var(--ink); }
+  .art-txt .specs { font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+  .art-img img { width: 100%; border: 1px solid var(--rule); display: block; filter: sepia(0.15); }
+  .art-img figcaption { font-size: 0.78rem; font-style: italic; color: var(--faint); margin-top: 6px; }
+
+  /* Interlude banner */
+  .interlude { border-top: 3px double var(--rule); border-bottom: 3px double var(--rule); margin: 50px 0; padding: 40px 6vw; text-align: center; }
+  .interlude .pull { font-size: clamp(1.4rem, 3.4vw, 2.2rem); }
+  .interlude .who { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mute); margin-top: 14px; }
+
+  /* Record: big-year table */
+  .year-row { display: grid; grid-template-columns: 170px 1fr; gap: 30px; padding: 28px 0; border-bottom: 1px solid var(--thin); align-items: start; }
+  @media (max-width: 700px) { .year-row { grid-template-columns: 1fr; gap: 8px; } }
+  .year-row .yr { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(1.6rem, 3.4vw, 2.4rem); line-height: 1.05; }
+  .year-row .yr small { display: block; font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-top: 4px; }
+  .year-row h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 6px; }
+  .year-row p { font-size: 0.93rem; color: var(--mute); }
+  .year-row p b { color: var(--ink); }
+
+  /* Index (skills) */
+  .index-cols { column-count: 3; column-gap: 40px; padding: 10px 0 40px; }
+  @media (max-width: 820px) { .index-cols { column-count: 2; } }
+  @media (max-width: 560px) { .index-cols { column-count: 1; } }
+  .idx-group { break-inside: avoid; margin-bottom: 22px; }
+  .idx-group h4 { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); border-bottom: 1px solid var(--rule); padding-bottom: 5px; margin-bottom: 8px; }
+  .idx-group li { list-style: none; font-size: 0.92rem; color: var(--mute); padding: 2px 0; border-bottom: 1px dotted var(--thin); display: flex; justify-content: space-between; }
+  .idx-group li::after { content: '·'; color: var(--faint); }
+
+  /* Back page */
+  .backpage { border-top: 3px double var(--rule); text-align: center; padding: 56px 0 40px; }
+  .backpage h2 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(1.9rem, 5vw, 3.2rem); margin-bottom: 12px; }
+  .backpage p { color: var(--mute); font-style: italic; max-width: 46ch; margin: 0 auto 26px; }
+  .bp-contacts { display: inline-block; text-align: left; border: 1px solid var(--rule); padding: 22px 30px; }
+  .bp-contacts .row { display: flex; gap: 14px; align-items: baseline; padding: 7px 0; font-size: 1rem; flex-wrap: wrap; }
+  .bp-contacts .k { font-family: 'Oswald', sans-serif; font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); width: 58px; }
+  .bp-contacts .v { user-select: all; }
+  .bp-contacts button { font-family: 'Oswald', sans-serif; font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; background: none; border: 1px solid var(--thin); color: var(--mute); padding: 2px 10px; }
+  .colophon { font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-top: 34px; }
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<header class="mast wrap">
+  <div class="top-row">
+    <span class="kicker">Portfolio · Issue Nº 01</span>
+    <span class="kicker">Delhi, India — 2026</span>
+    <button id="themeToggle">Night edition</button>
+  </div>
+  <h1>Amit Kumar Singh</h1>
+  <div class="deck">
+    <span>Applied AI Engineering</span>
+    <span>★ NLP · Multimodal · Computer Vision ★</span>
+    <span>From Model Weights to Kubernetes</span>
+  </div>
+  <div class="deck" style="border-top:none">
+    <span style="user-select:all">✉ thegigasurgeon@gmail.com</span>
+    <span style="user-select:all">📞 +91-9915503368</span>
+    <span><a href="Amit_Kumar_Singh_Resume.pdf" download style="color:var(--red)">Résumé ↓</a></span>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true"><div class="strip" id="tickerStrip">
+  <span><b>80K+</b> PDFs processed daily</span><span>◆</span>
+  <span>Accuracy <b>35% → 99.85%</b></span><span>◆</span>
+  <span><b>1000s</b> of dev-hours saved weekly</span><span>◆</span>
+  <span><b>200%</b> pipeline speedup</span><span>◆</span>
+  <span><b>3×</b> FPS in real-time video</span><span>◆</span>
+  <span><b>8</b> engineers led</span><span>◆</span>
+  <span><b>5+</b> models fused per pipeline</span><span>◆</span>
+</div></div>
+
+<main class="wrap">
+  <article class="feature reveal">
+    <div>
+      <span class="kicker" style="color:var(--red)">The Lead Story</span>
+      <h2 class="headline">Teaching machines to read 80,000 documents a day — and getting 99.85% of it right.</h2>
+      <div class="byline">Being a brief account of the work of one AI engineer, in four acts.</div>
+      <div class="cols">
+        <p class="dropcap">Amit Kumar Singh builds the kind of AI systems that don't get demos — they get uptime. At Real Brokerage he leads an <b>agentic document-intelligence platform</b> that reads dense, inconsistent real-estate paperwork with <b>5+ specialized models fused in a single pipeline</b>: object detection, OCR, vision-language models, reasoning LLMs, and embedding models, coordinated by agents with tool-calling and subagents.</p>
+        <p>The models themselves are not off-the-shelf. Open weights — LLaMA 3.3, Qwen 3, Gemma — are adapted with <b>LoRA and QLoRA</b>, then post-trained with <b>GRPO reinforcement learning</b> to reason about the domain; hosted frontier models (Gemini 3.5 Pro/Flash, GPT-4o) are tuned to work alongside them.</p>
+        <p>The result: extraction accuracy rose from 35% to <b>99.85%</b>, and the platform now processes <b>80,000+ PDFs every day</b> as microservices on Kubernetes across AWS and GCP.</p>
+        <p>His earlier career was spent in production computer vision — real-time sports analytics at 3× frame rate, satellite segmentation with 90% of post-processing eliminated — which is where the inference-optimization instincts come from: quantization, TensorRT, graph fusion, and when necessary, surgery on the architecture itself.</p>
+      </div>
+    </div>
+    <aside class="rail">
+      <div class="pull">The best model is the one that ships — and keeps shipping at 4 a.m.</div>
+      <div class="fact"><span class="kicker">By the numbers</span><div class="fv">99.85%</div><div class="fd">extraction accuracy, up from 35%</div></div>
+      <div class="fact"><div class="fv">80K+</div><div class="fd">PDFs processed daily in production</div></div>
+      <div class="fact"><div class="fv">8</div><div class="fd">engineers led across jurisdictions</div></div>
+      <a class="dl" href="Amit_Kumar_Singh_Resume.pdf" download>↓ Download the résumé</a>
+    </aside>
+  </article>
+
+  <div class="sec-banner reveal"><h2>The Systems</h2></div>
+
+  <article class="article reveal">
+    <div class="roman">I.</div>
+    <div class="art-txt">
+      <h3>The Agentic Document-Intelligence Platform</h3>
+      <div class="standfirst">Real Brokerage — in production, 80K+ PDFs a day</div>
+      <p>Manual review of real-estate documents couldn't scale. The answer was decomposition: cooperating agents over <b>5+ models</b> — detection, OCR, vision VLMs, reasoning LLMs, embeddings — with open models fine-tuned via <b>LoRA/QLoRA and GRPO RL post-training</b>. Deployed as microservices on Kubernetes across AWS &amp; GCP.</p>
+      <p><b>Accuracy 35% → 99.85%.</b></p>
+      <div class="specs">VLM · YOLOv9 · Doctr OCR · GRPO · Kubernetes</div>
+    </div>
+    <figure class="art-img"><img src="assets/doc-intelligence.svg" alt="Document intelligence architecture" /><figcaption>Fig. I — The pipeline, as the agents see it.</figcaption></figure>
+  </article>
+
+  <article class="article reveal">
+    <div class="roman">II.</div>
+    <div class="art-txt">
+      <h3>One Router to Rule the Models</h3>
+      <div class="standfirst">Multi-LLM orchestration infrastructure</div>
+      <p>Every team was hand-rolling LLM calls. A central intent-routing layer over <b>Gemini 3.5 Pro/Flash, GPT-4o, LLaMA 3.3, Qwen 3, and Gemma</b> — with per-task LoRA fine-tunes and graceful fallback — became the organization's default path to automation, saving <b>thousands of developer-hours weekly</b>.</p>
+      <div class="specs">Intent routing · RAG · Structured output · Vertex AI</div>
+    </div>
+    <figure class="art-img"><img src="assets/orchestration.svg" alt="Orchestration router" /><figcaption>Fig. II — The router, fanning out.</figcaption></figure>
+  </article>
+
+  <article class="article reveal">
+    <div class="roman">III.</div>
+    <div class="art-txt">
+      <h3>Retrieval, Done Precisely</h3>
+      <div class="standfirst">End-to-end RAG pipeline</div>
+      <p>Naive RAG retrieves plausible-but-wrong context. This one routes intent, chunks semantically, searches dense <b>and</b> keyword indexes, reranks, and fuses multi-source evidence before the LLM ever reasons — the retrieval backbone behind the platform's daily volume.</p>
+      <div class="specs">Hybrid retrieval · Reranking · Embeddings · BM25</div>
+    </div>
+    <figure class="art-img"><img src="assets/rag.svg" alt="RAG pipeline" /><figcaption>Fig. III — Evidence, assembled.</figcaption></figure>
+  </article>
+
+  <article class="article reveal">
+    <div class="roman">IV.</div>
+    <div class="art-txt">
+      <h3>The Agent That Reviews the Code</h3>
+      <div class="standfirst">Claude Agent SDK automation</div>
+      <p>Triggered by PRs, incidents, and webhooks, an agentic loop reads diffs, runs tests, inspects logs, spawns subagents, and posts findings — returning senior-engineer hours to feature work.</p>
+      <div class="specs">Tool-calling · Subagents · Webhooks</div>
+    </div>
+    <figure class="art-img"><img src="assets/claude-agent.svg" alt="Agent loop" /><figcaption>Fig. IV — The loop that never tires.</figcaption></figure>
+  </article>
+
+  <article class="article reveal">
+    <div class="roman">V.</div>
+    <div class="art-txt">
+      <h3>Sport, at the Speed of Sport</h3>
+      <div class="standfirst">Real-time video analytics — Streamingo AI</div>
+      <p>Detection, multi-object tracking, pose estimation, and court localization — Swin/VideoMAE/ViT backbones compiled into TensorRT engines with INT8/FP16 quantization and batched streams: <b>3× the frame rate</b> on identical GPUs.</p>
+      <div class="specs">TensorRT · ONNX · Pose · Tracking</div>
+    </div>
+    <figure class="art-img"><img src="assets/vision.svg" alt="Sports analytics" /><figcaption>Fig. V — Every frame, accounted for.</figcaption></figure>
+  </article>
+
+  <article class="article reveal">
+    <div class="roman">VI.</div>
+    <div class="art-txt">
+      <h3>Maps, Redrawn by Machine</h3>
+      <div class="standfirst">Satellite segmentation — Attentive AI</div>
+      <p>HRNet and Vision Transformer networks segmenting property features from orbit — <b>+12% accuracy</b> and <b>90% of post-processing eliminated</b>, with end-to-end ownership of two products.</p>
+      <div class="specs">HRNet · ViT · Geospatial</div>
+    </div>
+    <figure class="art-img"><img src="assets/segmentation.svg" alt="Satellite segmentation" /><figcaption>Fig. VI — Tile in, mask out.</figcaption></figure>
+  </article>
+
+  <div class="interlude reveal">
+    <div class="pull">Frontier research is a paper; production is a promise.</div>
+    <div class="who">— the working philosophy</div>
+  </div>
+
+  <div class="sec-banner reveal"><h2>The Record</h2></div>
+  <div class="year-row reveal"><div class="yr">2024—<small>present</small></div><div>
+    <h3>AI/ML Engineer, Real Brokerage — Delhi</h3>
+    <p>Leads the agentic document platform (<b>80K+ PDFs/day, 99.85%</b>); fine-tunes with <b>LoRA/QLoRA + GRPO</b>; built multi-LLM orchestration saving <b>1000s of dev-hours weekly</b>; leads an <b>8-person team</b>; 200% inference speedup.</p></div></div>
+  <div class="year-row reveal"><div class="yr">2022—24</div><div>
+    <h3>Deep Learning Engineer, Streamingo AI — Noida</h3>
+    <p>Temporal video understanding (Swin, VideoMAE, MVD, ViT, BEiT); zero/few-shot with CLIP &amp; Detic; real-time sports analytics at <b>3× FPS</b> via TensorRT/ONNX.</p></div></div>
+  <div class="year-row reveal"><div class="yr">2021—22</div><div>
+    <h3>CV Research Engineer, Attentive AI — Noida</h3>
+    <p>Satellite segmentation with HRNet &amp; ViT; <b>+12% accuracy, −90% post-processing</b>; owned Falcon &amp; Respod end-to-end.</p></div></div>
+  <div class="year-row reveal"><div class="yr">2020—21</div><div>
+    <h3>Software Engineer, Nokia — Bangalore</h3>
+    <p>Meta-learning platform for model selection &amp; hyperparameter optimization; explainability with SHAP &amp; LIME.</p></div></div>
+
+  <div class="sec-banner reveal"><h2>The Index</h2></div>
+  <div class="index-cols reveal">
+    <div class="idx-group"><h4>Post-Training</h4><ul><li>GRPO (RL)</li><li>LoRA / QLoRA</li><li>Distillation</li><li>Pruning</li><li>Multimodal fine-tuning</li><li>Reasoning models</li></ul></div>
+    <div class="idx-group"><h4>Agentic AI</h4><ul><li>Multi-agent systems</li><li>Tool-calling</li><li>Subagents</li><li>Claude Agent SDK</li><li>LangChain</li></ul></div>
+    <div class="idx-group"><h4>Retrieval</h4><ul><li>Intent routing</li><li>Semantic chunking</li><li>Hybrid retrieval</li><li>Reranking</li><li>Structured output</li></ul></div>
+    <div class="idx-group"><h4>Vision</h4><ul><li>YOLOv9</li><li>Doctr OCR</li><li>Swin / VideoMAE</li><li>ViT / BEiT / CLIP</li><li>HRNet</li><li>Pose estimation</li></ul></div>
+    <div class="idx-group"><h4>Inference</h4><ul><li>TensorRT</li><li>ONNX / graph fusion</li><li>INT8 / FP16</li><li>AWQ / GPTQ</li><li>Continuous batching</li><li>KV-cache reuse</li></ul></div>
+    <div class="idx-group"><h4>Infrastructure</h4><ul><li>Kubernetes / Docker</li><li>Microservices</li><li>AWS · EC2 / SageMaker</li><li>GCP · Vertex / GKE</li><li>Self-hosted GPU</li></ul></div>
+    <div class="idx-group"><h4>Languages</h4><ul><li>Python</li><li>C++</li><li>JavaScript</li><li>PyTorch / TensorFlow</li><li>OpenCV</li></ul></div>
+  </div>
+</main>
+
+<footer class="backpage wrap">
+  <span class="kicker" style="color:var(--red)">The Back Page</span>
+  <h2>Correspondence invited.</h2>
+  <p>On AI engineering, applied research, and hard problems in language, vision, and everything between.</p>
+  <div class="bp-contacts">
+    <div class="row"><span class="k">Email</span><span class="v">thegigasurgeon@gmail.com</span><button data-copy="thegigasurgeon@gmail.com">copy</button></div>
+    <div class="row"><span class="k">Phone</span><span class="v">+91-9915503368</span><button data-copy="+91-9915503368">copy</button></div>
+    <div class="row"><span class="k">Web</span><a class="v" style="color:var(--red)" href="https://www.linkedin.com/in/thegigasurgeon/" target="_blank" rel="noopener">linkedin.com/in/thegigasurgeon</a></div>
+    <div class="row"><span class="k">Résumé</span><a class="v" style="color:var(--red)" href="Amit_Kumar_Singh_Resume.pdf" download>Amit_Kumar_Singh_Resume.pdf ↓</a></div>
+  </div>
+  <div class="colophon">Amit Kumar Singh · Issue Nº 01 · Set in Playfair &amp; Source Serif · © 2026</div>
+</footer>
+
+<script>
+  // Duplicate the ticker strip so the marquee loops seamlessly.
+  const strip = document.getElementById('tickerStrip');
+  strip.innerHTML += strip.innerHTML;
+
+  const root = document.documentElement, toggle = document.getElementById('themeToggle');
+  const saved = localStorage.getItem('theme-magazine');
+  if (saved) { root.setAttribute('data-theme', saved); toggle.textContent = saved === 'dark' ? 'Day edition' : 'Night edition'; }
+  toggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    toggle.textContent = next === 'dark' ? 'Day edition' : 'Night edition';
+    localStorage.setItem('theme-magazine', next);
+  });
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('[data-copy]').forEach(btn => btn.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(btn.dataset.copy); } catch {
+      const ta = document.createElement('textarea'); ta.value = btn.dataset.copy;
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    }
+    const prev = btn.textContent; btn.textContent = 'copied'; setTimeout(() => btn.textContent = prev, 1500);
+  }));
+</script>
+</body>
+</html>
