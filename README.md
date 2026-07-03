@@ -5,7 +5,7 @@ A dependency-free portfolio website. No build step, no npm install.
 ## Themes
 
 Open **`themes.html`** first — it's a picker that previews every look. Each theme is a
-full standalone page and each has its own built-in **light/dark toggle** (top-right).
+full standalone page and each has its own built-in **light/dark toggle** (top-right). 
 
 **Structural layouts** — genuinely different placement, components, and navigation:
 
